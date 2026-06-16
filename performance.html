@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Performance Management | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/pillars/pm.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #0f172a;
+      --accent: #2563eb;
+      --accent-light: #dbeafe;
+      --bg-light: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      background: var(--accent);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--accent);
+      background: white;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 8rem 5% 6rem;
+      background: radial-gradient(circle at top right, #e0f2fe 0%, transparent 40%),
+                  radial-gradient(circle at bottom left, #f1f5f9 0%, transparent 40%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 500px;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* GRID & CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: var(--card-shadow);
+      border-color: var(--accent-light);
+    }
+
+    .card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+      color: var(--primary);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      font-size: 0.95rem;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-light);
+    }
+
+    .card .btn {
+      width: 100%;
+      margin-top: auto;
+    }
+
+    /* DATA SECTION */
+    .data-section {
+      background: white;
+      border-radius: 30px;
+      padding: 4rem;
+      margin-top: 6rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    /* TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      margin-top: 2rem;
+      border-radius: 15px;
+      border: 1px solid #e2e8f0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: #f1f5f9;
+      padding: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    td {
+      padding: 1.25rem;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: #f8fafc;
+    }
+
+    .center-content {
+      text-align: center;
+      vertical-align: middle;
+      font-weight: 600;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 4rem 5% 2rem;
+      margin-top: 8rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
+      .hero h1 { font-size: 3rem; }
+      .hero-content { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+      .hero-image img { max-width: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 3rem 5%; }
+      .data-section { padding: 2rem; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="images/WVSGH.png" alt="Logo">
+      <span>WVSGH PORTAL</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="history.html">History</a>
+      <a href="hrstructure.html">HR Structure</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="primehrm.html" class="active">Prime-HRM Pillar</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Excellence in Service</span>
+      <h1>Performance Management</h1>
+      <p>A comprehensive ecosystem designed to monitor, evaluate, and enhance professional competencies and institutional quality standards at WVSGH.</p>
+      <div class="hero-btns">
+        <a href="#quick-access" class="btn btn-primary">Get Started <i class="fa-solid fa-arrow-right"></i></a>
+        <a href="#validators-section" class="btn btn-outline">View Validators</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/cartoon/pm_cartoon.png" alt="Performance Icon">
+    </div>
+  </section>
+
+  <div class="container" id="quick-access">
+    <div class="section-header">
+      <h2>Resources & Tools</h2>
+      <p>Quick access to policies, calendars, and essential documentation.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <i class="fa-solid fa-calendar-check"></i>
+        <h3>QMS CALENDAR</h3>
+        <p>Stay updated with the Quality Management System milestones and scheduled audits.</p>
+        <a href="docs/pm/QMS Calendar.pdf" class="btn btn-outline">Access Files</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-file-shield"></i>
+        <h3>SMPS POLICY</h3>
+        <p>Review the Strategic Management Policy System and organizational guidelines.</p>
+        <a href="docs/pm/SPMS Policy.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-paper-plane"></i>
+        <h3>PM REQUEST FORM</h3>
+        <p>Digitally submit and track your performance-related requests and submissions.</p>
+        <a href="docs/pm/PM request form.pdf" class="btn btn-outline">Open Form</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-diagram-project"></i>
+        <h3>ISO FLOW CHART</h3>
+        <p>Visualize standard operating procedures through our detailed ISO process flows.</p>
+        <a href="docs/pm/Flow Chart ISO.pdf" class="btn btn-outline">Explore Map</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-user-check"></i>
+        <h3>SERVICE VALIDATORS</h3>
+        <p>Identify the designated officials responsible for service quality validation.</p>
+        <a href="#validators-section" class="btn btn-outline">Go to Table</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-gavel"></i>
+        <h3>SALN GUIDELINES</h3>
+        <p>Essential visual guidelines and instructions for SALN compliance and filing.</p>
+        <a href="docs/pm/SALN Visual Guidelines.pdf" class="btn btn-outline">Read More</a>
+      </div>
+    </div>
+
+    <!-- DATA SECTION -->
+    <section class="data-section" id="validators-section">
+      <div class="section-header">
+        <h2>Service Designated Validators</h2>
+        <p>The following personnel are appointed to validate service performance across divisions.</p>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 30%;">Division / Service</th>
+              <th colspan="2" style="text-align: center;">Target & Accomplishment Validator</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>OMCC</td>
+              <td rowspan="2" colspan="2" class="center-content">MR. PEDRO S. SISNORIO JR.</td>
+            </tr>
+            <tr>
+              <td>HOPSS</td>
+            </tr>
+            <tr>
+              <td>MEDICAL SERVICE</td>
+              <td colspan="2" class="center-content">DR. EDENE S. JAMOYOT</td>
+            </tr>
+            <tr>
+              <td>NURSING SERVICE</td>
+              <td colspan="2" class="center-content">MR. EDYN MICHAEL S. SUGANOB</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo" style="color: white;">
+        <img src="images/WVSGH.png" alt="Logo">
+        <span>WVSGH HR PORTAL</span>
+      </div>
+      <nav>
+        <a href="#" style="color: rgba(255,255,255,0.7);">Privacy Policy</a>
+        <a href="#" style="color: rgba(255,255,255,0.7);">Terms of Service</a>
+      </nav>
+    </div>
+    <div class="footer-copy">
+      © 2026 WVSGH Human Resource Management Office | Performance Management Pillar
+    </div>
+  </footer>
+
+</body>
+</html>

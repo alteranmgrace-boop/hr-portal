@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>News Detail | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/WVSGH.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+    :root {
+      --primary: #1e3a8a; --secondary: #0f172a; --accent: #3b82f6; --bg-light: #f8fafc;
+      --text-main: #1e293b; --text-muted: #64748b;
+    }
+    body { font-family: 'Plus Jakarta Sans', sans-serif; background: var(--bg-light); color: var(--text-main); margin: 0; }
+    .navbar { background: white; padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--secondary); font-weight: 800; }
+    .logo img { height: 40px; }
+    .container { max-width: 800px; margin: 4rem auto; padding: 0 5%; background: white; border-radius: 30px; padding: 3rem; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .badge { display: inline-block; padding: 0.5rem 1rem; border-radius: 10px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1rem; }
+    .badge.rec { background: #dcfce7; color: #166534; }
+    .badge.gov, .badge.governance { background: #fee2e2; color: #991b1b; }
+    .badge.recruitment { background: #dcfce7; color: #166534; }
+    .badge.perf, .badge.performance { background: #fef9c3; color: #854d0e; }
+    .badge.learn, .badge.learning { background: #e0f2fe; color: #075985; }
+    .badge.rewards { background: #f3e8ff; color: #6b21a8; }
+    h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--secondary); }
+    .meta { color: var(--text-muted); margin-bottom: 2rem; font-weight: 600; }
+    .main-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .content { font-size: 1.1rem; line-height: 1.8; color: #334155; white-space: pre-wrap; }
+    .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); text-decoration: none; font-weight: 700; margin-bottom: 2rem; }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html" class="logo"><img src="images/WVSGH.png" alt="Logo"><span>WVSGH HR PORTAL</span></a>
+  </header>
+
+  <div class="container">
+    <a href="announcements.html" class="back-btn"><i class="fa-solid fa-arrow-left"></i> Back to Announcements</a>
+    <div id="news-detail">
+        <p>Loading news...</p>
+    </div>
+  </div>
+
+  <script>
+    async function loadDetail() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const id = urlParams.get('id');
+      const container = document.getElementById('news-detail');
+
+      try {
+        const response = await fetch(`/api/announcements/${id}`);
+        const data = await response.json();
+
+        if (data.error) {
+            container.innerHTML = `<h1>Error</h1><p>${data.error}</p>`;
+            return;
+        }
+
+        const attachments = data.attachments ? JSON.parse(data.attachments) : [];
+        const images = attachments.filter(path => /\.(jpg|jpeg|png|gif|webp)$/i.test(path));
+        const docs = attachments.filter(path => /\.pdf$/i.test(path));
+
+        container.innerHTML = `
+          <span class="badge ${data.category}">${data.category}</span>
+          <h1>${data.title}</h1>
+          <div class="meta">Published on ${data.date}</div>
+          
+          ${images.map(img => `<img src="${img}" class="main-img" alt="News Image">`).join('')}
+          
+          <div class="content">${data.full_news || data.content}</div>
+          
+          ${docs.length > 0 ? `
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
+              <h3 style="font-size: 1.1rem; margin-bottom: 1rem;"><i class="fa-solid fa-paperclip"></i> Attached Documents</h3>
+              <ul style="list-style: none; padding: 0;">
+                ${docs.map(doc => `
+                  <li style="margin-bottom: 0.5rem;">
+                    <a href="${doc}" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600; display: flex; align-items: center; gap: 8px;">
+                      <i class="fa-solid fa-file-pdf"></i> ${doc.split('-').slice(1).join('-')}
+                    </a>
+                  </li>
+                `).join('')}
+              </ul>
+            </div>
+          ` : ''}
+        `;
+      } catch (err) {
+        console.error("Detail load error:", err);
+        container.innerHTML = `<h1>Error</h1><p>Could not load news story (ID: ${id}).<br><small>${err.message}</small></p>`;
+      }
+    }
+    loadDetail();
+  </script>
+</body>
+</html>

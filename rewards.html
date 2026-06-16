@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rewards & Recognition | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/pillars/rnr.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #2e1065;
+      --accent: #7c3aed;
+      --accent-hover: #6d28d9;
+      --accent-light: #f5f3ff;
+      --bg-light: #faf5ff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      background: var(--accent);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    nav a:hover, nav a.active {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 8rem 5% 6rem;
+      background: radial-gradient(circle at top right, #ede9fe 0%, transparent 40%),
+                  radial-gradient(circle at bottom left, #f5f3ff 0%, transparent 40%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero h1 img {
+      height: 70px;
+      width: auto;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 600px;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* FORMS GRID */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 6rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-light);
+    }
+
+    .card i {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* BENEFITS LIST */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      margin-bottom: 6rem;
+    }
+
+    .benefit-card {
+      background: white;
+      border-radius: 24px;
+      padding: 2.5rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .benefit-card h3 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--accent-light);
+    }
+
+    .benefit-list {
+      list-style: none;
+    }
+
+    .benefit-list li {
+      display: flex;
+      padding: 1rem 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 1.05rem;
+    }
+
+    .benefit-list li:last-child {
+      border-bottom: none;
+    }
+
+    .benefit-list li span {
+      width: 140px;
+      flex-shrink: 0;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 0.9rem;
+      padding-top: 0.5rem;
+    }
+
+    .benefit-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      flex: 1;
+    }
+
+    .benefit-tag {
+      background: var(--accent-light);
+      color: var(--accent);
+      padding: 0.6rem 1.25rem;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border: 1px solid rgba(124, 58, 237, 0.15);
+      transition: var(--transition);
+    }
+
+    .benefit-tag:hover {
+      background: var(--accent);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    }
+
+    /* DATA SECTIONS */
+    .data-section {
+      background: white;
+      border-radius: 30px;
+      padding: 4rem;
+      margin-top: 4rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .table-subtitle {
+      color: var(--primary);
+      margin: 2.5rem 0 1.5rem;
+      font-size: 1.5rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .table-subtitle::before {
+      content: "";
+      width: 8px;
+      height: 24px;
+      background: var(--accent);
+      border-radius: 4px;
+    }
+
+    /* TABLE */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 15px;
+      border: 1px solid #e2e8f0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    td {
+      padding: 1.25rem;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    tr:hover td {
+      background: #fafafa;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      font-size: 1rem;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 10px 15px -3px rgba(124, 58, 237, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-light);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 5rem 5% 2rem;
+      margin-top: 8rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
+      .hero h1 { font-size: 3rem; justify-content: center; }
+      .hero-content { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+      .hero-image img { max-width: 400px; }
+      .benefit-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 3rem 5%; }
+      .data-section { padding: 2rem; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="images/WVSGH.png" alt="Logo">
+      <span>WVSGH PORTAL</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="history.html">History</a>
+      <a href="hrstructure.html">HR Structure</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="primehrm.html" class="active">PRIME-HRM Pillars</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Appreciation & Support</span>
+      <h1><img src="images/pillars/rnr.png" alt="R&R Logo"> Rewards & Recognition</h1>
+      <p>Celebrating institutional excellence and ensuring the welfare of our workforce through competitive benefits and comprehensive support systems.</p>
+      <div class="hero-btns">
+        <a href="#benefits" class="btn btn-primary">View Benefits <i class="fa-solid fa-gift"></i></a>
+        <a href="#payouts" class="btn btn-outline">Payout Schedule</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/cartoon/rnr_cartoon.png" alt="Rewards Icon">
+    </div>
+  </section>
+
+  <div class="container">
+    
+    <div class="section-header">
+      <h2>Forms & Requests</h2>
+      <p>Access essential documents for recognition nominations and leave management.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <i class="fa-solid fa-award"></i>
+        <h3>R&R Request Form</h3>
+        <p>Nominate outstanding colleagues or teams for their achievements and dedication.</p>
+        <a href="docs/rnr/R&R Service request form.docx.pdf" class="btn btn-outline">View Form</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-file-signature"></i>
+        <h3>Leave Forms</h3>
+        <p>Access standard application forms for Sick, Vacation, and Special Privilege leaves.</p>
+        <a href="docs/rnr/Leave form.jpg" class="btn btn-outline">View Forms</a>
+      </div>
+
+      <div class="card">
+        <i class="fa-solid fa-circle-info"></i>
+        <h3>Leave Types</h3>
+        <p>Comprehensive guide on the various leave categories and their specific requirements.</p>
+        <a href="docs/rnr/Type of Leaves.pdf" class="btn btn-outline">View Leave</a>
+      </div>
+    </div>
+
+    <div class="section-header" id="benefits">
+      <h2>Employee Benefits Schedule</h2>
+      <p>A detailed roadmap of annual incentives and allowances for our personnel.</p>
+    </div>
+
+    <div class="benefit-grid">
+      <!-- PLANTILLA -->
+      <div class="benefit-card">
+        <h3>Plantilla Personnel</h3>
+        <ul class="benefit-list">
+          <li>
+            <span>JANUARY</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">3rd Tranche Salary Increase</div>
+              <div class="benefit-tag">Tax Refund</div>
+              <div class="benefit-tag">Leave Monetization (if any)</div>
+            </div>
+          </li>
+          <li>
+            <span>APRIL</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">Uniform/Clothing Allowance (U/CA)</div>
+            </div>
+          </li>
+          <li>
+            <span>MAY</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">Mid Year-End Bonus (MIB)</div>
+            </div>
+          </li>
+          <li>
+            <span>NOVEMBER</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">Year End Bonus (YEB)</div>
+              <div class="benefit-tag">Cash Gift</div>
+            </div>
+          </li>
+          <li>
+            <span>DECEMBER</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">Performance Enhancement Incentive (PEI)</div>
+              <div class="benefit-tag">Service Recognition Incentive (SRI)</div>
+              <div class="benefit-tag">Collective Negotiation Incentive Agreement (CNAI)</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- COS / JO -->
+      <div class="benefit-card">
+        <h3>Contract of Service & Job Order</h3>
+        <ul class="benefit-list">
+          <li>
+            <span>All Year Round</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">Payment of Services Rendered</div>
+            </div>
+          </li>
+          <li>
+            <span>December 2026</span>
+            <div class="benefit-tags">
+              <div class="benefit-tag">Gratuity Pay</div>
+              <div class="benefit-tag">Wellness Leave</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- TIMELINES SECTION -->
+    <section class="data-section">
+      <div class="section-header">
+        <h2>Administrative Timelines</h2>
+        <p>Key deadlines for document submission and administrative compliance.</p>
+      </div>
+
+      <h3 class="table-subtitle">Plantilla Employees</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Timeline / Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Daily Time Record (DTR)</td>
+              <td>5th Working Day of the Month</td>
+            </tr>
+            <tr>
+              <td>Work Schedule (Monthly)</td>
+              <td>25th Working Day of the Month</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="table-subtitle">COS / JO Employees</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Activity</th>
+              <th>Timeline / Deadline</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Daily Time Record (DTR)</td>
+              <td>End of the Month</td>
+            </tr>
+            <tr>
+              <td>Statement of Account (SOA)</td>
+              <td>End of the Month</td>
+            </tr>
+            <tr>
+              <td>Monthly Accomplishment Report (MAR)</td>
+              <td>
+                <strong>1st - 15th Period:</strong> 17th day of the Month<br>
+                <strong>16th - 31st Period:</strong> 5th day of the following Month
+              </td>
+            </tr>
+            <tr>
+              <td>Work Schedule (Monthly)</td>
+              <td>25th Working Day of the Month</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- PAYOUTS SECTION -->
+    <section class="data-section" id="payouts">
+      <div class="section-header">
+        <h2>Payout Schedules</h2>
+        <p>Estimated timelines for payroll releases and related allowances.</p>
+      </div>
+
+      <h3 class="table-subtitle">Plantilla Employees</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Payroll Item</th>
+              <th>Estimated Payout</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PHIC Sharing, RA, and Telephone Allowance</td>
+              <td>Every 1st Week of the Month</td>
+            </tr>
+            <tr>
+              <td>Basic Pay and PERA (1st - 15th Period)</td>
+              <td>Every 2nd Week of the Month</td>
+            </tr>
+            <tr>
+              <td>Basic Pay and PERA (16th - 31st Period)</td>
+              <td>Last Week of the Month</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="table-subtitle">COS / JO Employees</h3>
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Payroll Item</th>
+              <th>Estimated Payout</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>PHIC Sharing (as applicable)</td>
+              <td>Every 1st Week of the Month</td>
+            </tr>
+            <tr>
+              <td>Basic Pay / Professional Fees (1st - 15th Period)</td>
+              <td>Every 25th day of the Month</td>
+            </tr>
+            <tr>
+              <td>Basic Pay / Professional Fees (16th - 31st Period)</td>
+              <td>Every 10th day of the Month</td>
+            </tr>
+            <tr>
+              <td>Gratuity Pay</td>
+              <td>As per Executive Issuance (December)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo" style="color: white;">
+        <img src="images/WVSGH.png" alt="Logo">
+        <span>WVSGH HR PORTAL</span>
+      </div>
+      <nav>
+        <a href="contact.html" style="color: rgba(255,255,255,0.7);">Contact Us</a>
+        <a href="#" style="color: rgba(255,255,255,0.7);">Benefits Guide</a>
+      </nav>
+    </div>
+    <div class="footer-copy">
+      © 2026 WVSGH Human Resource Management Office | Rewards & Recognition Pillar
+    </div>
+  </footer>
+
+</body>
+</html>

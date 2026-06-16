@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/WVSGH.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #1e3a8a;
+      --secondary: #0f172a;
+      --accent: #3b82f6;
+      --accent-light: #eff6ff;
+      --bg-light: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: var(--bg-light);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    .navbar {
+      background: white;
+      padding: 1rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--secondary);
+      font-weight: 800;
+    }
+
+    .logo img { height: 40px; }
+
+    .container {
+      max-width: 1000px;
+      margin: 3rem auto;
+      padding: 0 20px;
+    }
+
+    .admin-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--card-shadow);
+      margin-bottom: 2rem;
+    }
+
+    h1, h2 {
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    .btn {
+      padding: 0.8rem 2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #2563eb;
+    }
+
+    .announcement-list {
+      margin-top: 2rem;
+    }
+
+    .announcement-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .announcement-item:last-child {
+      border-bottom: none;
+    }
+
+    .announcement-info h4 {
+      margin-bottom: 0.2rem;
+    }
+
+    .announcement-info span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .btn-delete {
+      background: #fee2e2;
+      color: #ef4444;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .btn-delete:hover {
+      background: #fecaca;
+    }
+
+    .message {
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+      display: block;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="images/WVSGH.png" alt="Logo">
+      <span>WVSGH HR PORTAL ADMIN</span>
+    </a>
+    <nav>
+      <a href="index.html" style="text-decoration: none; color: var(--accent); font-weight: 600;">Back to Portal</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="admin-card">
+      <h1>Add New Announcement / News Story</h1>
+      <div id="msg" class="message"></div>
+      <form id="announcementForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input type="text" id="title" required placeholder="e.g. New Policy Update">
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select id="category" required>
+            <option value="governance">Governance</option>
+            <option value="recruitment">Recruitment</option>
+            <option value="performance">Performance</option>
+            <option value="learning">L&D</option>
+            <option value="rewards">Rewards</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" id="date" required>
+        </div>
+        <div class="form-group">
+          <label for="content">Short Summary (Shows on Main Board)</label>
+          <textarea id="content" required placeholder="Type a brief summary here..." style="height: 80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="full_news">Full Story / Description (Optional)</label>
+          <textarea id="full_news" placeholder="Type the full detailed story here..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="attachments">Upload Images or Scanned PDFs (Multiple allowed)</label>
+          <input type="file" id="attachments" multiple accept="image/*,.pdf">
+          <small style="color: var(--text-muted); display: block; margin-top: 5px;">You can select multiple photos or scanned documents.</small>
+        </div>
+        <button type="submit" class="btn btn-primary">Publish to Portal</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2>Manage Announcements</h2>
+      <div class="announcement-list" id="announcementList">
+        <!-- List will be populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('announcementForm');
+    const msg = document.getElementById('msg');
+    const list = document.getElementById('announcementList');
+
+    // Set default date to today
+    document.getElementById('date').valueAsDate = new Date();
+
+    async function loadAnnouncements() {
+      const res = await fetch('/api/announcements');
+      const data = await res.json();
+      list.innerHTML = '';
+      data.forEach(ann => {
+        const div = document.createElement('div');
+        div.className = 'announcement-item';
+        div.innerHTML = `
+          <div class="announcement-info">
+            <h4>${ann.title}</h4>
+            <span>${ann.date} | ${ann.category}</span>
+          </div>
+          <button class="btn btn-delete" onclick="deleteAnnouncement(${ann.id})">Delete</button>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      console.log('Publish button clicked, sending data...');
+      
+      const formData = new FormData();
+      formData.append('title', document.getElementById('title').value);
+      formData.append('category', document.getElementById('category').value);
+      formData.append('date', document.getElementById('date').value);
+      formData.append('content', document.getElementById('content').value);
+      formData.append('full_news', document.getElementById('full_news').value);
+      
+      const files = document.getElementById('attachments').files;
+      for (let i = 0; i < files.length; i++) {
+        formData.append('attachments', files[i]);
+      }
+
+      try {
+        const res = await fetch('/api/announcements', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await res.json();
+        
+        msg.style.display = 'block'; // Ensure message is visible
+        
+        if (res.ok) {
+          console.log('Success:', result.message);
+          msg.textContent = result.message;
+          msg.className = 'message success';
+          form.reset();
+          document.getElementById('date').valueAsDate = new Date();
+          loadAnnouncements();
+        } else {
+          console.error('Server error:', result.error);
+          msg.textContent = result.error;
+          msg.className = 'message error';
+        }
+      } catch (err) {
+        console.error('Network error:', err);
+        msg.style.display = 'block';
+        msg.textContent = "Cannot connect to server. Is node server.js running?";
+        msg.className = 'message error';
+      }
+      
+      setTimeout(() => {
+        msg.style.display = 'none';
+      }, 5000);
+    });
+
+    async function deleteAnnouncement(id) {
+      if (!confirm('Are you sure you want to delete this?')) return;
+      
+      console.log('Sending delete request for ID:', id);
+      try {
+        const res = await fetch(`/api/announcements/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+        
+        if (res.ok) {
+          console.log('Delete successful:', result.message);
+          loadAnnouncements();
+        } else {
+          console.error('Delete failed:', result.error);
+          alert('Error: ' + result.error);
+        }
+      } catch (err) {
+        console.error('Network or Server error:', err);
+        alert('Failed to connect to the server.');
+      }
+    }
+
+    loadAnnouncements();
+  </script>
+</body>
+</html>

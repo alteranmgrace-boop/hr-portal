@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Governance | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/pillars/5.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #0f172a;
+      --accent: #991b1b;
+      --accent-hover: #7f1d1d;
+      --accent-light: #fef2f2;
+      --bg-light: #fff5f5;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      background: var(--accent);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    nav a:hover, nav a.active {
+      color: white;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 8rem 5% 6rem;
+      background: radial-gradient(circle at top right, #fef2f2 0%, transparent 40%),
+                  radial-gradient(circle at bottom left, #fff5f5 0%, transparent 40%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .hero h1 img {
+      height: 70px;
+      width: auto;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 600px;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* GOVERNANCE CARDS */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-bottom: 6rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      box-shadow: var(--card-shadow);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-light);
+    }
+
+    .card i {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    .card p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      font-size: 1rem;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 10px 15px -3px rgba(239, 68, 68, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-light);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--accent);
+      color: white;
+      padding: 5rem 5% 2rem;
+      margin-top: 8rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-content .logo img {
+      /* filter: brightness(0) invert(1); */
+    }
+
+    .footer-content nav a {
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .footer-content nav a:hover {
+      color: white;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: rgba(255,255,255,0.6);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
+      .hero h1 { font-size: 3rem; justify-content: center; }
+      .hero-content { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+      .hero-image img { max-width: 400px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 3rem 5%; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="images/WVSGH.png" alt="Logo">
+      <span>WVSGH PORTAL</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="history.html">History</a>
+      <a href="hrstructure.html">Structure</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="primehrm.html" class="active">PRIME-HRM Pillars</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Strategic Leadership</span>
+      <h1><img src="images/pillars/gov.png" alt="Governance Logo"> Governance</h1>
+      <p>Ensuring institutional integrity through strategic planning, policy development, and digital transformation at WVSGH.</p>
+      <div class="hero-btns">
+        <a href="#resources" class="btn btn-primary">Our Resources <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/cartoon/gov_cartoon.png" alt="Governance Icon">
+    </div>
+  </section>
+
+  <div class="container">
+    
+    <div class="section-header" id="resources">
+      <h2>Systems & Policies</h2>
+      <p>Core frameworks and digital tools under the Governance pillar.</p>
+    </div>
+
+    <div class="grid">
+      <!-- 1. Citizen's Charter -->
+      <div class="card">
+        <i class="fa-solid fa-scroll"></i>
+        <h3>Citizen's Charter</h3>
+        <p>Official guide to the services provided by WVSGH, ensuring transparency and accountability in our operations.</p>
+        <a href="policies/Citizen's Charter.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+
+      <!-- 2. Overtime Services -->
+      <div class="card">
+        <i class="fa-solid fa-clock"></i>
+        <h3>Overtime & CTO Rules</h3>
+        <p>Internal Rules and Procedures on the Rendition of Overtime Services, Overtime Pay, and the Availment of CTO of the WVS Personnel (Plantilla and COS).</p>
+        <a href="policies/CTO and Overtime.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+
+      <!-- 3. Hiring & Rehiring of COS (Implementation) -->
+      <div class="card">
+        <i class="fa-solid fa-user-plus"></i>
+        <h3>Hiring & Rehiring of COS</h3>
+        <p>Dissemination and Implementation of the Internal Policy and Guidelines on the Hiring and Rehiring of the Contract of Service (COS) Personnel in the WVSGH.</p>
+        <a href="policies/Hiring & Rehiring.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+
+      <!-- 4. Hiring & Rehiring of COS (Guidelines) -->
+      <div class="card">
+        <i class="fa-solid fa-file-signature"></i>
+        <h3>Wellness Leave</h3>
+        <p>Implementation of Wellness Leave Policy in the Western Visayas Sanitarium and General Hospital (WVSGH).</p>
+        <a href="policies/wellness.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+
+      <!-- 5. Flexible Work Schedule -->
+      <div class="card">
+        <i class="fa-solid fa-calendar-days"></i>
+        <h3>Flexible Work Schedule</h3>
+        <p>Implementation of Flexible Work Schedule policies to support work-life balance and operational efficiency for hospital personnel.</p>
+        <a href="policies/Flexible work schedule.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+
+      <!-- 6. Working Hours -->
+      <div class="card">
+        <i class="fa-solid fa-business-time"></i>
+        <h3>Working Hours Policy</h3>
+        <p>Formal Dissemination of Internal Policy on Working Hours and Relative Thereto for Western Visayas Sanitarium and General Hospital Employees.</p>
+        <a href="policies/Working Hours.pdf" class="btn btn-outline">View Policy</a>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo" style="color: white;">
+        <img src="images/WVSGH.png" alt="Logo">
+        <span>WVSGH HR PORTAL</span>
+      </div>
+      <nav>
+        <a href="contact.html" style="color: rgba(255,255,255,0.7);">Contact Us</a>
+        <a href="hrstructure.html" style="color: rgba(255,255,255,0.7);">Organizational Chart</a>
+      </nav>
+    </div>
+    <div class="footer-copy">
+      © 2026 WVSGH Human Resource Management Office | Governance Pillar
+    </div>
+  </footer>
+
+</body>
+</html>

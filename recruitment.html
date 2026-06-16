@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Careers & Recruitment | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/pillars/rsp.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #4c0519;
+      --accent: #be123c;
+      --accent-hover: #9f1239;
+      --accent-light: #ffe4e6;
+      --bg-light: #fff1f2;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      background: var(--accent);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: white;
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo img {
+      height: 40px;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: white;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+    }
+
+    nav a:hover, nav a.active {
+      color: var(--accent);
+      background: white;
+    }
+
+    /* HERO SECTION */
+    .hero {
+      padding: 8rem 5% 6rem;
+      background: radial-gradient(circle at top right, #fecdd3 0%, transparent 40%),
+                  radial-gradient(circle at bottom left, #fff1f2 0%, transparent 40%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 4rem;
+    }
+
+    .hero-content {
+      flex: 1;
+      max-width: 600px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+
+    .hero-image img {
+      width: 100%;
+      max-width: 450px;
+      filter: drop-shadow(0 20px 50px rgba(0,0,0,0.1));
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* MAIN CONTAINER */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 4rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    /* STATS GRID */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 6rem;
+    }
+
+    .stat-card {
+      background: white;
+      border-radius: 24px;
+      padding: 3rem 2rem;
+      text-align: center;
+      border: 1px solid rgba(0,0,0,0.05);
+      transition: var(--transition);
+      box-shadow: var(--card-shadow);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-10px);
+      border-color: var(--accent-light);
+    }
+
+    .stat-card i {
+      font-size: 2.5rem;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .stat-card h1 {
+      font-size: 3.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+      letter-spacing: -2px;
+    }
+
+    .stat-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* REQUIREMENTS SECTION */
+    .requirements-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+
+    .req-box {
+      background: white;
+      border-radius: 24px;
+      padding: 3.5rem;
+      box-shadow: var(--card-shadow);
+      border: 1px solid rgba(0,0,0,0.03);
+    }
+
+    .req-title-group {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 2.5rem;
+    }
+
+    .req-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .req-box h2 {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+    }
+
+    .req-list {
+      list-style: none;
+    }
+
+    .req-list li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1.25rem;
+      color: var(--text-main);
+      font-size: 1.05rem;
+    }
+
+    .req-list li::before {
+      content: "\f058";
+      font-family: "Font Awesome 6 Free";
+      font-weight: 900;
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+
+    /* ADDRESS BOX */
+    .address-card {
+      background: var(--bg-light);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-left: 6px solid var(--accent);
+    }
+
+    .address-card h4 {
+      color: var(--primary);
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+    }
+
+    .address-info {
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.4;
+    }
+
+    .note-box {
+      background: #fff;
+      border: 2px dashed var(--accent-light);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 2rem;
+      font-size: 0.95rem;
+      color: var(--text-main);
+    }
+
+    /* BUTTONS */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.85rem 2rem;
+      border-radius: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      font-size: 1rem;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: none;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      box-shadow: 0 10px 15px -3px rgba(190, 18, 60, 0.4);
+    }
+
+    .btn-outline {
+      border: 2px solid var(--accent);
+      color: var(--accent);
+    }
+
+    .btn-outline:hover {
+      background: var(--accent-light);
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 5rem 5% 2rem;
+      margin-top: 8rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero { flex-direction: column; text-align: center; padding-top: 6rem; }
+      .hero h1 { font-size: 3rem; }
+      .hero-content { max-width: 100%; }
+      .hero-btns { justify-content: center; }
+      .hero-image img { max-width: 350px; }
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 3rem 5%; }
+      .req-box { padding: 2rem; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="images/WVSGH.png" alt="Logo">
+      <span>WVSGH PORTAL</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="history.html">History</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="hrstructure.html">HR Structure</a>
+      <a href="primehrm.html" class="active">PRIME-HRM Pillars</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-content">
+      <span class="badge">Join Our Team</span>
+      <h1>Recruitment, Selection and Placement</h1>
+      <p>Shape the future of healthcare excellence. Discover meaningful pathways and professional growth at Western Visayas Sanitarium and General Hospital.</p>
+      <div class="hero-btns">
+        <a href="#vacancies" class="btn btn-primary">Explore Vacancies <i class="fa-solid fa-arrow-down"></i></a>
+        <a href="#requirements" class="btn btn-outline">Application Guide</a>
+      </div>
+    </div>
+    <div class="hero-image">
+      <img src="images/cartoon/tala.png" alt="Recruitment Icon">
+    </div>
+  </section>
+
+  <div class="container">
+    
+    <div class="section-header" id="vacancies">
+      <h2>Workforce at a Glance</h2>
+      <p>Current distribution of our dedicated personnel across different appointment types.</p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <i class="fa-solid fa-users"></i>
+        <h1>264</h1>
+        <h3>Plantilla Personnel</h3>
+        <p>Permanent Career Service Appointments</p>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-file-contract"></i>
+        <h1>267</h1>
+        <h3>Contract of Service</h3>
+        <p>Active Professional Service Contracts</p>
+      </div>
+
+      <div class="stat-card">
+        <i class="fa-solid fa-briefcase"></i>
+        <h1>56</h1>
+        <h3>Job Order Staff</h3>
+        <p>Supporting Short-term Assignments</p>
+      </div>
+    </div>
+
+    <!-- VACANT POSITIONS SECTION -->
+    <div class="section-header" id="vacancies-list">
+      <h2>Vacant Position Announcements</h2>
+      <p>Latest official publications of available career opportunities at WVSGH.</p>
+    </div>
+
+    <div class="req-box" style="text-align: center; margin-bottom: 6rem; border: 2px solid var(--accent); background: var(--accent-light);">
+      <i class="fa-solid fa-bullhorn" style="font-size: 3rem; color: var(--accent); margin-bottom: 1.5rem;"></i>
+      <h3 style="color: var(--primary); font-weight: 800; font-size: 1.5rem; margin-bottom: 0.5rem;">WE ARE HIRING!</h3>
+      <p style="color: var(--text-main); font-weight: 600; margin-bottom: 1.5rem;">Join our team of healthcare professionals.</p>
+      
+      <div style="background: white; border-radius: 16px; padding: 2rem; margin: 0 auto 2rem; max-width: 500px; text-align: left; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+        <h4 style="color: var(--accent); margin-bottom: 1rem; border-bottom: 1px solid var(--accent-light); padding-bottom: 0.5rem;">Current Vacant Positions:</h4>
+        <ul style="list-style: none; color: var(--text-main);">
+          <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 10px;"></i> (1) Medical Technologist</li>
+          <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 10px;"></i> (1) Medical Officer IV</li>
+          <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 10px;"></i> (1) Pharmacist I</li>
+          <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 10px;"></i> (1) Medical Technologist I</li>
+          <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 10px;"></i> (1) Nurse I</li>
+          <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent); margin-right: 10px;"></i> (1) Nursing Attendant I</li>
+        </ul>
+      </div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="docs/rsp/Publication.pdf" class="btn btn-primary"><i class="fa-solid fa-file-pdf"></i> View Official Publication</a>
+      </div>
+    </div>
+
+    <div class="section-header" id="requirements">
+      <h2>Application Guidelines</h2>
+      <p>Step-by-step requirements for aspiring applicants and current employees.</p>
+    </div>
+
+    <div class="requirements-grid">
+      
+      <!-- PLANTILLA/COS GENERAL -->
+      <div class="req-box">
+        <div class="req-title-group">
+          <div class="req-icon"><i class="fa-solid fa-clipboard-list"></i></div>
+          <h2>General Requirements (All Positions)</h2>
+        </div>
+        <ul class="req-list">
+          <li><strong>Personal Data Sheet (PDS):</strong> Fully accomplished CS Form No. 212 (Revised 2025) with Work Experience Sheet and recent passport-sized digital picture. Must be digitally or electronically signed.</li>
+          <li><strong>Performance Rating:</strong> Official copy of the performance rating from the last rating period (if applicable).</li>
+          <li><strong>Proof of Eligibility:</strong> Authenticated hard copy or electronic copy of CSC Eligibility or PRC License.</li>
+          <li><strong>Educational Background:</strong> Official Transcript of Records and Diploma from the educational institution.</li>
+        </ul>
+      </div>
+
+      <!-- COS SPECIFIC -->
+      <div class="req-box">
+        <div class="req-title-group">
+          <div class="req-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+          <h2>COS Applicant Specifics</h2>
+        </div>
+        <ul class="req-list">
+          <li>Photocopy of Transcript of Records and Diploma.</li>
+          <li>Photocopy of Certificate of Employment (COE), Trainings, and Seminars attended within the last 5 years.</li>
+          <li>Photocopy of CSC Eligibility, PRC License, and Board Rating.</li>
+          <li>Photocopy of PSA Birth Certificate and PSA Marriage Certificate (if applicable).</li>
+          <li>Photocopy of Barangay Clearance and Police Clearance.</li>
+        </ul>
+
+        <div class="address-card">
+          <h4>Application Addressed To:</h4>
+          <p class="address-info">
+            STEPHANIE A. ABELLO, MD, MMHOA, FPSP<br>
+            OIC - Medical Center Chief II<br>
+            Western Visayas Sanitarium and General Hospital<br>
+            Brgy. Inangayan, Santa Barbara, Iloilo
+          </p>
+        </div>
+
+        <div class="note-box">
+          <i class="fa-solid fa-info-circle" style="color: var(--accent);"></i>
+          <strong>Submission Note:</strong> Applicants may hand in applications to the RSP Secretary at the HRMO Office or send via email to 
+          <a href="mailto:rsp.wvsgh@gmail.com" style="color: var(--accent); font-weight: 700; text-decoration: none;">rsp.wvsgh@gmail.com</a>
+        </div>
+      </div>
+
+      <!-- RSP FORM -->
+      <div class="req-box" style="border-top: 5px solid var(--accent);">
+        <div class="req-title-group">
+          <div class="req-icon"><i class="fa-solid fa-file-invoice"></i></div>
+          <h2>RSP Request Form</h2>
+        </div>
+        <p style="margin-bottom: 2rem; color: var(--text-muted);">The RSP Request Form is required for specific administrative requests involving the following documents:</p>
+        <ul class="req-list" style="margin-bottom: 2.5rem;">
+          <li>Personal Data Form (PDF)</li>
+          <li>CS Form No. 33-A (Appointment Paper)</li>
+        </ul>
+        <a href="docs/rsp/RSP Service Request Form.docx.pdf" class="btn btn-primary"><i class="fa-solid fa-download"></i> View RSP Request Form</a>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo" style="color: white;">
+        <img src="images/WVSGH.png" alt="Logo">
+        <span>WVSGH HR PORTAL</span>
+      </div>
+      <nav>
+        <a href="contact.html" style="color: rgba(255,255,255,0.7);">Contact Us</a>
+        <a href="#" style="color: rgba(255,255,255,0.7);">Careers</a>
+      </nav>
+    </div>
+    <div class="footer-copy">
+      © 2026 WVSGH Human Resource Management Office | Recruitment, Selection & Placement Pillar
+    </div>
+  </footer>
+
+</body>
+</html>

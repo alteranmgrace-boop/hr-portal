@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Our Heritage | WVSGH HR Portal</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/WVSGH.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      --primary: #0f172a;
+      --accent: #ca8a04;
+      --accent-hover: #a16207;
+      --accent-light: #fefce8;
+      --bg-light: #f8fafc;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
+      background-color: #ffffff;
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NAVIGATION */
+    .navbar {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 5%;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .logo img {
+      height: 45px;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: var(--transition);
+      padding: 0.6rem 1.2rem;
+      border-radius: 10px;
+    }
+
+    nav a:hover, nav a.active {
+      color: #3b82f6;
+      background: #eff6ff;
+    }
+
+    /* CINEMATIC HERO */
+    .hero {
+      height: 70vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+      background: var(--primary); /* Fallback */
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('images/hosp.jpg') no-repeat center center/cover;
+      background-attachment: fixed;
+      opacity: 0.6; /* This creates the 'faded' look */
+      z-index: 0;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 0 5%;
+      z-index: 1;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 2rem;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .hero p {
+      font-size: 1.4rem;
+      font-weight: 400;
+      opacity: 0.9;
+      max-width: 700px;
+      margin: 0 auto 3rem;
+    }
+
+    /* STORY SECTION */
+    .section {
+      padding: 5rem 5%;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+
+    .story-content h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      color: var(--primary);
+      margin-bottom: 2rem;
+      line-height: 1.2;
+    }
+
+    .story-content p {
+      margin-bottom: 1rem;
+      color: var(--text-main);
+      font-size: 1.1rem;
+    }
+
+    .story-images {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+    }
+
+    .story-images img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+    }
+
+    .story-images img:nth-child(1) { grid-column: span 2; height: 400px; }
+    .story-images img:hover { transform: scale(1.02); }
+
+    .early-caption {
+      grid-column: span 2;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-style: italic;
+      margin-top: -1rem;
+    }
+
+    /* LEADERSHIP SECTION */
+    .leadership-section {
+      background: var(--bg-light);
+      padding: 8rem 5%;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 5rem;
+    }
+
+    .section-header h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .faculty-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    .leader-card {
+      background: white;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: var(--transition);
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+    }
+
+    .leader-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .leader-card img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1.5rem;
+      border: 5px solid var(--accent-light);
+    }
+
+    .leader-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 0.5rem;
+    }
+
+    /* TIMELINE SECTION */
+    .timeline-section {
+      padding: 8rem 5%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 4rem;
+      margin-bottom: 4rem;
+      border-left: 3px solid var(--accent);
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -11px;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--accent);
+      border: 4px solid white;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px var(--accent-light);
+    }
+
+    .timeline-date {
+      font-weight: 800;
+      color: var(--accent);
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .timeline-content {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .timeline-content ul {
+      list-style: none;
+    }
+
+    .timeline-content li {
+      position: relative;
+      padding-left: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .timeline-content li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* FOOTER */
+    footer {
+      background: var(--primary);
+      color: white;
+      padding: 5rem 5% 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+
+    .footer-copy {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 2rem;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero h1 { font-size: 3.5rem; }
+      .story-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .story-images { order: -1; }
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .hero p { font-size: 1.1rem; }
+      .section { padding: 4rem 5%; }
+      .leadership-section { padding: 4rem 5%; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <img src="images/WVSGH.png" alt="Logo">
+      <span>WVSGH HR PORTAL</span>
+    </a>
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="announcements.html">Announcements</a>
+      <a href="history.html" class="active">History</a>
+      <a href="hrstructure.html">HR Structure</a>
+      <a href="contact.html">Contact Us</a>
+      <a href="primehrm.html">PRIME-HRM PIllars</a>
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>A Legacy of Compassion</h1>
+      <p>Journey through nearly a century of healthcare excellence, from our humble beginnings to a modern center of medical innovation.</p>
+      <a href="#founding" class="btn-primary" style="display: inline-block; padding: 1rem 2.5rem; background: var(--accent); color: white; text-decoration: none; border-radius: 12px; font-weight: 600;">Discover Our Story</a>
+    </div>
+  </section>
+
+  <!-- FOUNDING SECTION -->
+  <section class="section" id="founding">
+    <div class="story-grid">
+      <div class="story-content">
+        <h2>The Founding & Early Years</h2>
+        <p>The institution was established in <strong>1927</strong> as one of the eight original sanitaria in the Philippines. It was created to provide treatment and care for persons affected by leprosy who had previously been confined in the Iloilo Provincial Jail. The facility was established on land donated by <strong>Rosario Gonzaga de Jesena</strong> of Jaro, Iloilo, where patients initially lived in nipa huts. Additional land was later donated and acquired to accommodate the growing patient population.</p>
+        <p>The first medical personnel included Dr. Goitia, Gil Leonides, and <strong>Adriano A. Soliva</strong>, a nurse from Culion who became the station's first nurse. As the Segregation Law of Lepers was enforced, the number of patients admitted to the facility steadily increased.</p>
+        <p>In 1930, <strong>Dr. Conelio Consing</strong> became Medical Chief and formally named the facility the Western Visayas Treatment Station (WVTS). He introduced improvements to the institution and expanded its operations. In 1934, he was succeeded by Dr. Armando Paras. His administration was marked by conflicts between management and patients, resulting in the deportation of several patients to Culion.</p>
+        <p>In 1937, <strong>Dr. Marciano Carreon</strong> assumed leadership and initiated significant reforms. He introduced the <em>Bayanihan System</em>, improved infrastructure through road construction and land development, established recreational facilities, and supported educational programs. Social and recreational activities, including scouting and sports programs, were organized to promote community integration among patients.</p>
+      </div>
+      <div class="story-images">
+        <img src="images/history/h30.jpg" alt="Vintage WVSGH">
+        <img src="images/history/h25.jpg" alt="WVSGH History">
+        <img src="images/history/h3.jpg" alt="WVSGH Archive">
+        <p class="early-caption">Early photographs of staff and patients at WVSGH archives.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GROWTH & DEVELOPMENT SECTION -->
+  <section class="section bg-light" style="background: var(--bg-light);">
+    <div class="story-content" style="max-width: 1000px; margin: 0 auto;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 2rem; text-align: center;">Growth & Institutional Development</h2>
+      <p>The institution continued to develop under succeeding medical chiefs. <strong>Dr. Emma Asuncion</strong> served from 1978 to 1999 and oversaw major institutional improvements. She was succeeded by Dr. Jose Mari Fermin (1999–2002), Dr. Nelson Flotilde (2002–2003), who initiated the hospital's PhilHealth accreditation, Dr. Edgardo Gonzaga (2003–2006), who facilitated funding for a 50-bed general hospital and the establishment of an LTO-accredited drug testing laboratory, and Dr. Faith Daphne Estrada (2006–2008), who began construction of the 50-bed General Hospital and procured additional medical equipment.</p>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP SECTION -->
+  <section class="leadership-section">
+    <div class="section-header">
+      <h2>Pillars of Leadership</h2>
+      <p>The distinguished Medical Center Chiefs who have shaped the future of WVSGH.</p>
+    </div>
+    <div class="faculty-grid">
+      <div class="leader-card">
+        <img src="images/Chief/C1.png" alt="Dr. Anabelle De Guzman">
+        <h3>Dr. Anabelle Pabiona De Guzman</h3>
+      </div>
+      <div class="leader-card">
+        <img src="images/Chief/C2.png" alt="Dr. Marlyn Convocar">
+        <h3>Dr. Marlyn W. Convocar</h3>
+      </div>
+      <div class="leader-card">
+        <img src="images/Chief/C3.png" alt="Dr. Feman Rene Autajay">
+        <h3>Dr. Feman Rene M. Autajay</h3>
+      </div>
+      <div class="leader-card">
+        <img src="images/Chief/C4.png" alt="Dr. Roel Jarina">
+        <h3>Dr. Roel T. Jarina</h3>
+      </div>
+      <div class="leader-card">
+        <img src="images/Chief/C5.png" alt="Dr. Gary Ong">
+        <h3>Dr. Gary U. Ong</h3>
+      </div>
+      <div class="leader-card">
+        <img src="images/Chief/C6.png" alt="Dr. Judy Ann Dumayas">
+        <h3>Dr. Judy Ann T. Dumayas</h3>
+      </div>
+      <div class="leader-card">
+        <img src="images/Chief/Dr. Abello.png" alt="Dr. Stephanie Abello" style="object-position: center 10%; background: var(--accent-light);">
+        <h3>Dr. Stephanie Abello</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- MODERN EVOLUTION SECTION -->
+  <section class="section">
+    <div class="story-content" style="max-width: 1000px; margin: 0 auto;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 2rem; text-align: center;">Transformation to General Hospital</h2>
+      <p>Under <strong>Dr. Annabelle Pabiona De Guzman</strong>, the new 50-bed hospital was completed. In accordance with Department of Health Administrative Order No. 2005-0013, the sanitarium was transformed into a general hospital with a leprosarium, providing services in Internal Medicine, Surgery, Obstetrics and Gynecology, Family Medicine, and Pediatrics. On January 12, 2010, President Gloria Macapagal-Arroyo inaugurated the hospital's main building, officially opening its services to the general public while maintaining its role as the region's primary leprosy referral center.</p>
+      <p>Following Dr. De Guzman's reassignment in 2014, <strong>Dr. Marlyn W. Convocar</strong> temporarily assumed leadership until April 2015. She was succeeded by <strong>Dr. Rene Feman M. Autajay</strong> as Officer-in-Charge, during whose administration New Building Phase I was completed and a new ambulance was acquired.</p>
+      <p>On April 19, 2016, <strong>Dr. Roel Jarina</strong> assumed leadership and oversaw the construction of Phases III and IV of the New Building and the acquisition of medical equipment through the Health Facilities Enhancement Program (HFEP). He was succeeded by <strong>Dr. Gary Ong</strong> in 2017, whose administration initiated the construction of the Outpatient Department (OPD) Building Phase I.</p>
+    </div>
+  </section>
+
+  <!-- MODERNIZATION & WVSGH SECTION -->
+  <section class="section bg-light" style="background: var(--bg-light);">
+    <div class="story-content" style="max-width: 1000px; margin: 0 auto;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 2rem; text-align: center;">Modernization & Expansion</h2>
+      <p><strong>Dr. Judy Ann T. Dumayas</strong> assumed office as Medical Center Chief in May 2018. During her administration, the hospital underwent significant modernization and expansion. Infrastructure projects included the construction of a hospital chapel, power house, upgraded utility systems, dialysis facilities, staff housing, isolation facilities, and infectious and non-infectious hospital complexes. The hospital also secured various accreditations, including ISO 9001:2015 certification, Mother-Baby Friendly Hospital accreditation, and TB-DOTS accreditation.</p>
+      <p>During the COVID-19 pandemic, the hospital expanded its facilities and services to support the regional response through the establishment of isolation wards, dormitories, emergency facilities, and specialized treatment areas. Additional medical equipment was procured through national health programs, while new hospital buildings were completed to increase service capacity.</p>
+      <p style="font-size: 1.5rem; font-weight: 800; color: var(--accent); text-align: center; margin: 3rem 0; font-family: 'Playfair Display', serif;">On April 29, 2022, Republic Act No. 11723 officially converted the Western Visayas Sanitarium into the Western Visayas Sanitarium and General Hospital (WVSGH).</p>
+      <p>Dr. Dumayas retired from government service on February 10, 2026. She was succeeded by <strong>Dr. Stephanie Abello</strong>, who was appointed Officer-in-Charge Medical Center Chief II.</p>
+    </div>
+  </section>
+
+  <!-- INSTITUTIONAL PROFILE SECTION -->
+  <section class="section">
+    <div class="story-content" style="max-width: 1000px; margin: 0 auto; text-align: center;">
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--primary); margin-bottom: 2rem;">Institutional Profile & Services</h2>
+      <p>WVSGH is a <strong>Level II Department of Health-retained hospital</strong> that provides both general healthcare services and specialized leprosy care. It serves as the principal referral center for leprosy patients in Western Visayas while offering comprehensive medical services to the general public.</p>
+      <p>The hospital provides services in Internal Medicine, Surgery, Obstetrics and Gynecology, Pediatrics, Family Medicine, and other allied healthcare specialties. It also operates a <strong>Malasakit Center</strong> and maintains accredited residency training programs in Family and Community Medicine.</p>
+      <p>WVSGH has an <strong>authorized bed capacity of 100</strong> and offers specialized services such as leprosy care, physical medicine and rehabilitation, and computed tomography (CT) scanning. As of 2026, the hospital holds a valid License to Operate issued by the Department of Health, reflecting its compliance with national healthcare standards and regulations.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="logo" style="color: white;">
+        <img src="images/WVSGH.png" alt="Logo">
+        <span>WVSGH HR PORTAL</span>
+      </div>
+      <nav>
+        <a href="history.html" style="color: rgba(255,255,255,0.7);">Heritage</a>
+        <a href="contact.html" style="color: rgba(255,255,255,0.7);">Get in Touch</a>
+      </nav>
+    </div>
+    <div class="footer-copy">
+      © 2026 WVSGH Human Resource Management Office | Heritage & Development
+    </div>
+  </footer>
+
+</body>
+</html>
