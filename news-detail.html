@@ -59,7 +59,7 @@
         }
 
         const attachments = data.attachments ? JSON.parse(data.attachments) : [];
-        const images = attachments.filter(path => /\.(jpg|jpeg|png|gif|webp)$/i.test(path));
+        const images = attachments.filter(path => /\.(jpg|jpeg|png|gif|webp|jfif|svg|bmp|tiff)$/i.test(path));
         const docs = attachments.filter(path => /\.pdf$/i.test(path));
 
         container.innerHTML = `

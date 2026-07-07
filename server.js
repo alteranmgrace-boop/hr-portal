@@ -116,6 +116,64 @@ app.delete('/api/announcements/:id', (req, res) => {
     });
 });
 
+// API endpoint to UPDATE/EDIT an announcement (retains attachments if none uploaded)
+app.put('/api/announcements/:id', upload.array('attachments'), (req, res) => {
+    const id = req.params.id;
+    if (!req.body) {
+        return res.status(400).json({ error: "Server could not parse the form data." });
+    }
+
+    const { title, content, full_news, date, category } = req.body;
+    
+    if (!title || !content || !date || !category) {
+        return res.status(400).json({ error: "Title, Summary, Date, and Category are required" });
+    }
+
+    // If new files were uploaded, replace the old files and update the attachments column
+    if (req.files && req.files.length > 0) {
+        const attachmentPaths = req.files.map(file => 'uploads/' + file.filename);
+        const attachmentsJson = JSON.stringify(attachmentPaths);
+
+        // Delete old files from disk
+        db.get("SELECT attachments FROM announcements WHERE id = ?", [id], (err, row) => {
+            if (!err && row && row.attachments) {
+                try {
+                    const files = JSON.parse(row.attachments);
+                    files.forEach(file => {
+                        if (fs.existsSync(file)) {
+                            fs.unlinkSync(file);
+                            console.log(`Deleted old file: ${file}`);
+                        }
+                    });
+                } catch (e) {
+                    console.error("Error parsing attachments for deletion on update:", e);
+                }
+            }
+
+            const sql = "UPDATE announcements SET title = ?, content = ?, full_news = ?, date = ?, category = ?, attachments = ? WHERE id = ?";
+            db.run(sql, [title, content, full_news || '', date, category, attachmentsJson, id], function(err) {
+                if (err) {
+                    console.error("Database error during update:", err.message);
+                    return res.status(500).json({ error: err.message });
+                }
+                console.log(`Successfully updated announcement with ID: ${id} (including new attachments)`);
+                res.json({ message: "Announcement updated successfully!" });
+            });
+        });
+    } else {
+        // Retain existing attachments - do not update the attachments column
+        const sql = "UPDATE announcements SET title = ?, content = ?, full_news = ?, date = ?, category = ? WHERE id = ?";
+        db.run(sql, [title, content, full_news || '', date, category, id], function(err) {
+            if (err) {
+                console.error("Database error during update:", err.message);
+                return res.status(500).json({ error: err.message });
+            }
+            console.log(`Successfully updated announcement with ID: ${id} (retained old attachments)`);
+            res.json({ message: "Announcement updated successfully!" });
+        });
+    }
+});
+
 // NEW: API endpoint to get a SINGLE announcement by ID
 app.get('/api/announcements/:id', (req, res) => {
     const id = req.params.id;

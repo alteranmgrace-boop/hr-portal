@@ -152,6 +152,18 @@
       background: #fecaca;
     }
 
+    .btn-edit {
+      background: #eff6ff;
+      color: #2563eb;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      margin-right: 0.5rem;
+    }
+
+    .btn-edit:hover {
+      background: #dbeafe;
+    }
+
     .message {
       padding: 1rem;
       border-radius: 10px;
@@ -218,9 +230,11 @@
         <div class="form-group">
           <label for="attachments">Upload Images or Scanned PDFs (Multiple allowed)</label>
           <input type="file" id="attachments" multiple accept="image/*,.pdf">
-          <small style="color: var(--text-muted); display: block; margin-top: 5px;">You can select multiple photos or scanned documents.</small>
+          <small style="color: var(--text-muted); display: block; margin-top: 5px;">You can select multiple photos or scanned documents. They will appear in the order you select them.</small>
+          <div id="filePreviewContainer" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px;"></div>
         </div>
-        <button type="submit" class="btn btn-primary">Publish to Portal</button>
+        <button type="submit" id="submitBtn" class="btn btn-primary">Publish to Portal</button>
+        <button type="button" id="cancelBtn" class="btn" style="display: none; background: #e2e8f0; color: #475569; margin-left: 10px;">Cancel Edit</button>
       </form>
     </div>
 
@@ -252,15 +266,153 @@
             <h4>${ann.title}</h4>
             <span>${ann.date} | ${ann.category}</span>
           </div>
-          <button class="btn btn-delete" onclick="deleteAnnouncement(${ann.id})">Delete</button>
+          <div>
+            <button class="btn btn-edit" onclick="startEdit(${ann.id})">Edit</button>
+            <button class="btn btn-delete" onclick="deleteAnnouncement(${ann.id})">Delete</button>
+          </div>
         `;
         list.appendChild(div);
       });
     }
 
+    let editingId = null;
+    let selectedFiles = [];
+    const cancelBtn = document.getElementById('cancelBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const formTitle = document.querySelector('.admin-card h1');
+    const fileInput = document.getElementById('attachments');
+    const previewContainer = document.getElementById('filePreviewContainer');
+
+    fileInput.addEventListener('change', () => {
+      const files = fileInput.files;
+      for (let i = 0; i < files.length; i++) {
+        if (!selectedFiles.some(f => f.name === files[i].name && f.size === files[i].size)) {
+          selectedFiles.push(files[i]);
+        }
+      }
+      renderPreviews();
+      fileInput.value = ''; // Reset so the same file can be re-added if removed
+    });
+
+    function renderPreviews() {
+      previewContainer.innerHTML = '';
+      selectedFiles.forEach((file, index) => {
+        const div = document.createElement('div');
+        div.style.position = 'relative';
+        div.style.width = '80px';
+        div.style.height = '80px';
+        div.style.border = '1px solid #e2e8f0';
+        div.style.borderRadius = '10px';
+        div.style.overflow = 'hidden';
+        div.style.background = '#f8fafc';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.justifyContent = 'center';
+
+        if (file.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+          div.appendChild(img);
+        } else {
+          const icon = document.createElement('i');
+          icon.className = 'fa-solid fa-file-pdf';
+          icon.style.fontSize = '2rem';
+          icon.style.color = '#ef4444';
+          div.appendChild(icon);
+        }
+
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.innerHTML = '&times;';
+        removeBtn.style.position = 'absolute';
+        removeBtn.style.top = '2px';
+        removeBtn.style.right = '2px';
+        removeBtn.style.background = 'rgba(239, 68, 68, 0.9)';
+        removeBtn.style.color = 'white';
+        removeBtn.style.border = 'none';
+        removeBtn.style.borderRadius = '50%';
+        removeBtn.style.width = '18px';
+        removeBtn.style.height = '18px';
+        removeBtn.style.cursor = 'pointer';
+        removeBtn.style.display = 'flex';
+        removeBtn.style.alignItems = 'center';
+        removeBtn.style.justifyContent = 'center';
+        removeBtn.style.fontSize = '12px';
+        removeBtn.style.fontWeight = 'bold';
+        removeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          selectedFiles.splice(index, 1);
+          renderPreviews();
+        });
+        div.appendChild(removeBtn);
+
+        const orderBadge = document.createElement('span');
+        orderBadge.textContent = index + 1;
+        orderBadge.style.position = 'absolute';
+        orderBadge.style.bottom = '2px';
+        orderBadge.style.left = '2px';
+        orderBadge.style.background = 'rgba(15, 23, 74, 0.8)';
+        orderBadge.style.color = 'white';
+        orderBadge.style.fontSize = '9px';
+        orderBadge.style.fontWeight = 'bold';
+        orderBadge.style.padding = '1px 5px';
+        orderBadge.style.borderRadius = '3px';
+        div.appendChild(orderBadge);
+
+        previewContainer.appendChild(div);
+      });
+    }
+
+    function startEdit(id) {
+      console.log('Starting edit for ID:', id);
+      fetch(`/api/announcements/${id}`)
+        .then(res => res.json())
+        .then(ann => {
+          if (ann.error) {
+            alert('Error: ' + ann.error);
+            return;
+          }
+          editingId = id;
+          document.getElementById('title').value = ann.title || '';
+          document.getElementById('category').value = ann.category || '';
+          document.getElementById('date').value = ann.date || '';
+          document.getElementById('content').value = ann.content || '';
+          document.getElementById('full_news').value = ann.full_news || '';
+          
+          selectedFiles = [];
+          renderPreviews();
+
+          form.scrollIntoView({ behavior: 'smooth' });
+          
+          formTitle.textContent = 'Edit Announcement';
+          submitBtn.textContent = 'Save Changes';
+          cancelBtn.style.display = 'inline-block';
+        })
+        .catch(err => {
+          console.error('Failed to load announcement details:', err);
+          alert('Failed to connect to the server.');
+        });
+    }
+
+    function cancelEdit() {
+      editingId = null;
+      form.reset();
+      selectedFiles = [];
+      renderPreviews();
+      document.getElementById('date').valueAsDate = new Date();
+      formTitle.textContent = 'Add New Announcement / News Story';
+      submitBtn.textContent = 'Publish to Portal';
+      cancelBtn.style.display = 'none';
+    }
+
+    cancelBtn.addEventListener('click', cancelEdit);
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      console.log('Publish button clicked, sending data...');
+      console.log('Submit button clicked, sending data...');
       
       const formData = new FormData();
       formData.append('title', document.getElementById('title').value);
@@ -269,14 +421,17 @@
       formData.append('content', document.getElementById('content').value);
       formData.append('full_news', document.getElementById('full_news').value);
       
-      const files = document.getElementById('attachments').files;
-      for (let i = 0; i < files.length; i++) {
-        formData.append('attachments', files[i]);
-      }
+      selectedFiles.forEach(file => {
+        formData.append('attachments', file);
+      });
+
+      const isEditing = editingId !== null;
+      const url = isEditing ? `/api/announcements/${editingId}` : '/api/announcements';
+      const method = isEditing ? 'PUT' : 'POST';
 
       try {
-        const res = await fetch('/api/announcements', {
-          method: 'POST',
+        const res = await fetch(url, {
+          method: method,
           body: formData
         });
         const result = await res.json();
@@ -287,8 +442,14 @@
           console.log('Success:', result.message);
           msg.textContent = result.message;
           msg.className = 'message success';
-          form.reset();
-          document.getElementById('date').valueAsDate = new Date();
+          if (isEditing) {
+            cancelEdit();
+          } else {
+            form.reset();
+            selectedFiles = [];
+            renderPreviews();
+            document.getElementById('date').valueAsDate = new Date();
+          }
           loadAnnouncements();
         } else {
           console.error('Server error:', result.error);
