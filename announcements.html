@@ -344,6 +344,7 @@
       .cat-link { padding: 0.6rem 1rem; font-size: 0.8rem; }
     }
   </style>
+  <link rel="stylesheet" href="tv.css">
 </head>
 <body>
 
@@ -387,7 +388,6 @@
 
   <footer>
     <p>© 2026 Western Visayas Sanitarium and General Hospital | HR Information Management System</p>
-    <p><a href="admin.html" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; margin-top: 10px; display: inline-block;">Admin Dashboard</a></p>
   </footer>
 
   <script>
@@ -406,7 +406,7 @@
           card.innerHTML = `
             <div class="card-meta">
               <span class="badge ${item.category || 'rec'}">${item.category || 'Recruitment'}</span>
-              <span class="date">${item.date}</span>
+              ${item.date ? `<span class="date">${item.date}</span>` : ''}
             </div>
             <h2 class="title">${item.title}</h2>
             <p class="desc">${item.content}</p>

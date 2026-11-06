@@ -183,6 +183,7 @@
       display: block;
     }
   </style>
+  <link rel="stylesheet" href="tv.css">
 </head>
 <body>
 
@@ -242,6 +243,129 @@
       <h2>Manage Announcements</h2>
       <div class="announcement-list" id="announcementList">
         <!-- List will be populated by JS -->
+      </div>
+    </div>
+
+    <div class="admin-card">
+      <h1 id="activityFormTitle">Add New HR Activity</h1>
+      <div id="activityMsg" class="message"></div>
+      <form id="activityForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="activityTitle">Title</label>
+          <input type="text" id="activityTitle" required placeholder="e.g. New Personnel Orientation">
+        </div>
+        <div class="form-group">
+          <label for="activityCategory">Category</label>
+          <select id="activityCategory" required>
+            <option value="">Select a category</option>
+            <option value="Governance">Governance</option>
+            <option value="Recruitment">Recruitment</option>
+            <option value="Performance">Performance</option>
+            <option value="L&D">L&amp;D</option>
+            <option value="Rewards">Rewards</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="activityDate">Date</label>
+          <input type="date" id="activityDate" required>
+        </div>
+        <div class="form-group">
+          <label for="activityShortDescription">Short Description</label>
+          <textarea id="activityShortDescription" required placeholder="Type a brief activity summary here..." style="height: 80px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="activityFullStory">Full Story</label>
+          <textarea id="activityFullStory" required placeholder="Type the complete activity story here..."></textarea>
+        </div>
+        <div class="form-group">
+          <label for="activityImage">Upload Activity Images</label>
+          <input type="file" id="activityImage" accept="image/*" multiple>
+          <small id="activityImageHint" style="color: var(--text-muted); display: block; margin-top: 5px;">Upload one or more images to show as a carousel on the full story page.</small>
+          <div id="activityImagePreview" style="margin-top: 15px;"></div>
+        </div>
+        <button type="submit" id="activitySubmitBtn" class="btn btn-primary">Publish Activity</button>
+        <button type="button" id="activityCancelBtn" class="btn" style="display: none; background: #e2e8f0; color: #475569; margin-left: 10px;">Cancel Edit</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <h2>Manage HR Activities</h2>
+      <div class="announcement-list" id="activityList">
+        <!-- Activity list will be populated by JS -->
+      </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- PERSONNEL CERTIFICATES MANAGEMENT -->
+    <!-- ========================================== -->
+    <div class="admin-card" id="certificates-section">
+      <h1 id="certFormTitle">Add HR Personnel Certificate(s)</h1>
+      <div id="certMsg" class="message"></div>
+      <form id="certForm" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="certPersonnelSelect">Select HR Personnel</label>
+          <select id="certPersonnelSelect" required>
+            <option value="">-- Choose HR Personnel --</option>
+            <option value="PEDRO S. SISNORIO JR.">PEDRO S. SISNORIO JR. - Supervising Administrative Officer (HRMO IV)</option>
+            <option value="JOSE B. BUHAYAN">JOSE B. BUHAYAN - Human Resource Secretary</option>
+            <option value="MAE ELA GRACE A. ALTERAN">MAE ELA GRACE A. ALTERAN - HR Information System Officer</option>
+            <option value="CRYSTAL ANNE B. LAGAÑA">CRYSTAL ANNE B. LAGAÑA - Recruitment, Selection and Placement In-Charge</option>
+            <option value="DYAN MAE S. BIGCAS">DYAN MAE S. BIGCAS - Learning and Development In-Charge</option>
+            <option value="JEN JEE C. PEÑASA">JEN JEE C. PEÑASA - Performance Management In-Charge</option>
+            <option value="ADRIAN O. TALINES">ADRIAN O. TALINES - Performance Management Assistant</option>
+            <option value="HAZEL B. MIRASOL">HAZEL B. MIRASOL - Rewards and Recognition In-Charge</option>
+            <option value="MARIE CRIS S. FLOGOSO">MARIE CRIS S. FLOGOSO - Payroll Assistant</option>
+            <option value="NATHANIEL P. DICHOSA">NATHANIEL P. DICHOSA - Leave Management Officer</option>
+            <option value="JEANNETTE O. SUTACIO">JEANNETTE O. SUTACIO - Biometrics/Leave Management Officer</option>
+            <option value="__custom__">+ Enter Custom Personnel Name...</option>
+          </select>
+        </div>
+        <div class="form-group" id="customPersonnelGroup" style="display: none;">
+          <label for="customPersonnelInput">Custom Personnel Name</label>
+          <input type="text" id="customPersonnelInput" placeholder="e.g. JUAN D. DELA CRUZ">
+        </div>
+        <div class="form-group">
+          <label for="certTitle">Certificate Title / Description (Optional)</label>
+          <input type="text" id="certTitle" placeholder="e.g. PRIME-HRM Level II Assessment & Recognition">
+          <small style="color: var(--text-muted); display: block; margin-top: 5px;">If left blank, the original filename will be used as the title.</small>
+        </div>
+        <div class="form-group">
+          <label for="certDate">Date Issued / Conferred (Optional)</label>
+          <input type="date" id="certDate">
+        </div>
+        <div class="form-group">
+          <label for="certFiles">Upload Certificate(s) (Images or PDFs, Multiple allowed)</label>
+          <input type="file" id="certFiles" multiple accept="image/*,.pdf" required>
+          <small style="color: var(--text-muted); display: block; margin-top: 5px;">You can upload one or multiple certificate photos (JPG, PNG) or scanned PDFs at once.</small>
+          <div id="certPreviewContainer" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 10px;"></div>
+        </div>
+        <button type="submit" id="certSubmitBtn" class="btn btn-primary">Upload Certificates</button>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; gap: 10px;">
+        <h2>Manage Personnel Certificates</h2>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <label for="filterPersonnel" style="margin-bottom: 0; font-size: 0.9rem; font-weight: 600;">Filter by Personnel:</label>
+          <select id="filterPersonnel" style="width: auto; padding: 0.5rem 1rem;">
+            <option value="all">All Personnel</option>
+            <option value="PEDRO S. SISNORIO JR.">PEDRO S. SISNORIO JR.</option>
+            <option value="JOSE B. BUHAYAN">JOSE B. BUHAYAN</option>
+            <option value="MAE ELA GRACE A. ALTERAN">MAE ELA GRACE A. ALTERAN</option>
+            <option value="CRYSTAL ANNE B. LAGAÑA">CRYSTAL ANNE B. LAGAÑA</option>
+            <option value="DYAN MAE S. BIGCAS">DYAN MAE S. BIGCAS</option>
+            <option value="JEN JEE C. PEÑASA">JEN JEE C. PEÑASA</option>
+            <option value="ADRIAN O. TALINES">ADRIAN O. TALINES</option>
+            <option value="HAZEL B. MIRASOL">HAZEL B. MIRASOL</option>
+            <option value="MARIE CRIS S. FLOGOSO">MARIE CRIS S. FLOGOSO</option>
+            <option value="NATHANIEL P. DICHOSA">NATHANIEL P. DICHOSA</option>
+            <option value="JEANNETTE O. SUTACIO">JEANNETTE O. SUTACIO</option>
+          </select>
+        </div>
+      </div>
+      <div class="announcement-list" id="certificateList">
+        <!-- Certificate list populated by JS -->
       </div>
     </div>
   </div>
@@ -489,7 +613,407 @@
       }
     }
 
+    const activityForm = document.getElementById('activityForm');
+    const activityMsg = document.getElementById('activityMsg');
+    const activityList = document.getElementById('activityList');
+    const activityCancelBtn = document.getElementById('activityCancelBtn');
+    const activitySubmitBtn = document.getElementById('activitySubmitBtn');
+    const activityFormTitle = document.getElementById('activityFormTitle');
+    const activityImageInput = document.getElementById('activityImage');
+    const activityImagePreview = document.getElementById('activityImagePreview');
+    const activityImageHint = document.getElementById('activityImageHint');
+    let editingActivityId = null;
+
+    document.getElementById('activityDate').valueAsDate = new Date();
+
+    function escapeActivityHtml(value) {
+      return String(value || '').replace(/[&<>"']/g, (char) => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;'
+      }[char]));
+    }
+
+    function showActivityMessage(text, type) {
+      activityMsg.style.display = 'block';
+      activityMsg.textContent = text;
+      activityMsg.className = `message ${type}`;
+      setTimeout(() => {
+        activityMsg.style.display = 'none';
+      }, 5000);
+    }
+
+    function getActivityImages(activity) {
+      if (Array.isArray(activity.image_urls)) return activity.image_urls;
+      return activity.image_url ? [activity.image_url] : [];
+    }
+
+    function renderActivityImagePreview(images) {
+      activityImagePreview.innerHTML = '';
+      const imageList = Array.isArray(images) ? images : [];
+      if (!imageList.length) return;
+
+      const previewGrid = document.createElement('div');
+      previewGrid.style.display = 'grid';
+      previewGrid.style.gridTemplateColumns = 'repeat(auto-fill, minmax(140px, 1fr))';
+      previewGrid.style.gap = '12px';
+
+      imageList.forEach((image, index) => {
+        const wrapper = document.createElement('div');
+        wrapper.style.border = '1px solid #e2e8f0';
+        wrapper.style.borderRadius = '10px';
+        wrapper.style.overflow = 'hidden';
+        wrapper.style.background = '#f8fafc';
+
+        const img = document.createElement('img');
+        img.src = image.src;
+        img.alt = image.label || `Activity image ${index + 1}`;
+        img.style.width = '100%';
+        img.style.height = '110px';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+
+        wrapper.appendChild(img);
+        previewGrid.appendChild(wrapper);
+      });
+
+      activityImagePreview.appendChild(previewGrid);
+    }
+
+    activityImageInput.addEventListener('change', () => {
+      const files = Array.from(activityImageInput.files);
+      if (!files.length) {
+        renderActivityImagePreview([]);
+        return;
+      }
+      renderActivityImagePreview(files.map(file => ({
+        src: URL.createObjectURL(file),
+        label: file.name
+      })));
+    });
+
+    async function loadActivities() {
+      try {
+        const res = await fetch('/api/activities');
+        const data = await res.json();
+        activityList.innerHTML = '';
+
+        if (!data.length) {
+          activityList.innerHTML = '<p style="color: var(--text-muted); padding: 1rem;">No activities have been added yet.</p>';
+          return;
+        }
+
+        data.forEach(activity => {
+          const div = document.createElement('div');
+          div.className = 'announcement-item';
+          div.innerHTML = `
+            <div class="announcement-info">
+              <h4>${escapeActivityHtml(activity.title)}</h4>
+              <span>${escapeActivityHtml(activity.date)} | ${escapeActivityHtml(activity.division)}</span>
+            </div>
+            <div>
+              <button class="btn btn-edit" onclick="startActivityEdit(${activity.id})">Edit</button>
+              <button class="btn btn-delete" onclick="deleteActivity(${activity.id})">Delete</button>
+            </div>
+          `;
+          activityList.appendChild(div);
+        });
+      } catch (err) {
+        console.error('Failed to load activities:', err);
+        activityList.innerHTML = '<p style="color: #991b1b; padding: 1rem;">Could not load activities.</p>';
+      }
+    }
+
+    function resetActivityForm() {
+      editingActivityId = null;
+      activityForm.reset();
+      renderActivityImagePreview([]);
+      activityImageHint.textContent = 'Upload one or more images to show as a carousel on the full story page.';
+      document.getElementById('activityDate').valueAsDate = new Date();
+      activityFormTitle.textContent = 'Add New HR Activity';
+      activitySubmitBtn.textContent = 'Publish Activity';
+      activityCancelBtn.style.display = 'none';
+    }
+
+    function startActivityEdit(id) {
+      fetch(`/api/activities/${id}`)
+        .then(res => res.json())
+        .then(activity => {
+          if (activity.error) {
+            alert('Error: ' + activity.error);
+            return;
+          }
+
+          editingActivityId = id;
+          document.getElementById('activityTitle').value = activity.title || '';
+          document.getElementById('activityCategory').value = activity.division || '';
+          document.getElementById('activityDate').value = activity.date || '';
+          document.getElementById('activityShortDescription').value = activity.short_description || '';
+          document.getElementById('activityFullStory').value = activity.full_story || '';
+          activityImageInput.value = '';
+          renderActivityImagePreview(getActivityImages(activity).map((src, index) => ({
+            src,
+            label: `${activity.title || 'Activity image'} ${index + 1}`
+          })));
+          activityImageHint.textContent = getActivityImages(activity).length ? 'Upload new images only if you want to replace the current carousel.' : 'Upload one or more images to show as a carousel on the full story page.';
+
+          activityForm.scrollIntoView({ behavior: 'smooth' });
+          activityFormTitle.textContent = 'Edit HR Activity';
+          activitySubmitBtn.textContent = 'Save Activity';
+          activityCancelBtn.style.display = 'inline-block';
+        })
+        .catch(err => {
+          console.error('Failed to load activity details:', err);
+          alert('Failed to connect to the server.');
+        });
+    }
+
+    activityCancelBtn.addEventListener('click', resetActivityForm);
+
+    activityForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('title', document.getElementById('activityTitle').value);
+      formData.append('division', document.getElementById('activityCategory').value);
+      formData.append('date', document.getElementById('activityDate').value);
+      formData.append('short_description', document.getElementById('activityShortDescription').value);
+      formData.append('full_story', document.getElementById('activityFullStory').value);
+
+      Array.from(activityImageInput.files).forEach(file => {
+        formData.append('images', file);
+      });
+
+      const isEditing = editingActivityId !== null;
+      const url = isEditing ? `/api/activities/${editingActivityId}` : '/api/activities';
+      const method = isEditing ? 'PUT' : 'POST';
+
+      try {
+        const res = await fetch(url, {
+          method,
+          body: formData
+        });
+        const result = await res.json();
+
+        if (res.ok) {
+          showActivityMessage(result.message, 'success');
+          resetActivityForm();
+          loadActivities();
+        } else {
+          showActivityMessage(result.error, 'error');
+        }
+      } catch (err) {
+        console.error('Activity save failed:', err);
+        showActivityMessage('Cannot connect to server. Is node server.js running?', 'error');
+      }
+    });
+
+    async function deleteActivity(id) {
+      if (!confirm('Are you sure you want to delete this activity?')) return;
+
+      try {
+        const res = await fetch(`/api/activities/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+
+        if (res.ok) {
+          loadActivities();
+        } else {
+          alert('Error: ' + result.error);
+        }
+      } catch (err) {
+        console.error('Activity delete failed:', err);
+        alert('Failed to connect to the server.');
+      }
+    }
+
+    // ==========================================
+    // CERTIFICATES MANAGEMENT SCRIPT
+    // ==========================================
+    const certForm = document.getElementById('certForm');
+    const certMsg = document.getElementById('certMsg');
+    const certPersonnelSelect = document.getElementById('certPersonnelSelect');
+    const customPersonnelGroup = document.getElementById('customPersonnelGroup');
+    const customPersonnelInput = document.getElementById('customPersonnelInput');
+    const certFilesInput = document.getElementById('certFiles');
+    const certPreviewContainer = document.getElementById('certPreviewContainer');
+    const certSubmitBtn = document.getElementById('certSubmitBtn');
+    const filterPersonnel = document.getElementById('filterPersonnel');
+    const certificateList = document.getElementById('certificateList');
+
+    certPersonnelSelect.addEventListener('change', () => {
+      if (certPersonnelSelect.value === '__custom__') {
+        customPersonnelGroup.style.display = 'block';
+        customPersonnelInput.required = true;
+      } else {
+        customPersonnelGroup.style.display = 'none';
+        customPersonnelInput.required = false;
+      }
+    });
+
+    certFilesInput.addEventListener('change', () => {
+      certPreviewContainer.innerHTML = '';
+      const files = Array.from(certFilesInput.files);
+      files.forEach(file => {
+        const div = document.createElement('div');
+        div.style.position = 'relative';
+        div.style.width = '70px';
+        div.style.height = '70px';
+        div.style.border = '1px solid #e2e8f0';
+        div.style.borderRadius = '8px';
+        div.style.overflow = 'hidden';
+        div.style.background = '#f8fafc';
+        div.style.display = 'flex';
+        div.style.alignItems = 'center';
+        div.style.justifyContent = 'center';
+
+        if (file.type.startsWith('image/')) {
+          const img = document.createElement('img');
+          img.src = URL.createObjectURL(file);
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+          div.appendChild(img);
+        } else {
+          div.innerHTML = '<i class="fa-solid fa-file-pdf" style="font-size: 1.8rem; color: #ef4444;"></i>';
+        }
+        certPreviewContainer.appendChild(div);
+      });
+    });
+
+    function showCertMessage(text, type) {
+      certMsg.textContent = text;
+      certMsg.className = `message ${type}`;
+      setTimeout(() => {
+        certMsg.className = 'message';
+      }, 5000);
+    }
+
+    certForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      let personnel = certPersonnelSelect.value;
+      if (personnel === '__custom__') {
+        personnel = customPersonnelInput.value.trim();
+      }
+
+      if (!personnel) {
+        showCertMessage('Please select or enter a personnel name.', 'error');
+        return;
+      }
+
+      if (!certFilesInput.files || certFilesInput.files.length === 0) {
+        showCertMessage('Please select certificate files to upload.', 'error');
+        return;
+      }
+
+      const formData = new FormData();
+      formData.append('personnel_name', personnel);
+      formData.append('title', document.getElementById('certTitle').value);
+      formData.append('date_issued', document.getElementById('certDate').value);
+
+      Array.from(certFilesInput.files).forEach(file => {
+        formData.append('certificates', file);
+      });
+
+      certSubmitBtn.disabled = true;
+      certSubmitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Uploading...';
+
+      try {
+        const res = await fetch('/api/certificates', {
+          method: 'POST',
+          body: formData
+        });
+        const result = await res.json();
+
+        if (res.ok) {
+          showCertMessage(result.message || 'Certificates uploaded successfully!', 'success');
+          certForm.reset();
+          customPersonnelGroup.style.display = 'none';
+          certPreviewContainer.innerHTML = '';
+          loadCertificates();
+        } else {
+          showCertMessage(result.error || 'Failed to upload certificates.', 'error');
+        }
+      } catch (err) {
+        console.error('Certificate upload failed:', err);
+        showCertMessage('Cannot connect to server. Is node server.js running?', 'error');
+      } finally {
+        certSubmitBtn.disabled = false;
+        certSubmitBtn.innerHTML = 'Upload Certificates';
+      }
+    });
+
+    filterPersonnel.addEventListener('change', () => {
+      loadCertificates();
+    });
+
+    async function loadCertificates() {
+      const selected = filterPersonnel.value;
+      const url = selected === 'all' ? '/api/certificates' : `/api/certificates?personnel=${encodeURIComponent(selected)}`;
+
+      try {
+        const res = await fetch(url);
+        const certs = await res.json();
+        certificateList.innerHTML = '';
+
+        if (!Array.isArray(certs) || certs.length === 0) {
+          certificateList.innerHTML = '<div style="padding: 1.5rem; text-align: center; color: var(--text-muted);">No certificates found for this selection.</div>';
+          return;
+        }
+
+        certs.forEach(cert => {
+          const div = document.createElement('div');
+          div.className = 'announcement-item';
+          const isPdf = cert.image_url.toLowerCase().endsWith('.pdf');
+          div.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 15px;">
+              <div style="width: 50px; height: 50px; border-radius: 8px; overflow: hidden; background: #f1f5f9; display: flex; align-items: center; justify-content: center; flex-shrink: 0; border: 1px solid #e2e8f0;">
+                ${isPdf 
+                  ? '<i class="fa-solid fa-file-pdf" style="font-size: 1.5rem; color: #ef4444;"></i>' 
+                  : `<img src="${cert.image_url}" style="width: 100%; height: 100%; object-fit: cover;">`
+                }
+              </div>
+              <div class="announcement-info">
+                <h4>${cert.title || 'Certificate'}</h4>
+                <span><strong>${cert.personnel_name}</strong> ${cert.date_issued ? ' | ' + cert.date_issued : ''}</span>
+              </div>
+            </div>
+            <div>
+              <a href="${cert.image_url}" target="_blank" class="btn btn-edit" style="text-decoration: none; display: inline-block;">View</a>
+              <button class="btn btn-delete" onclick="deleteCertificate(${cert.id})">Delete</button>
+            </div>
+          `;
+          certificateList.appendChild(div);
+        });
+      } catch (err) {
+        console.error('Failed to load certificates:', err);
+        certificateList.innerHTML = '<div style="padding: 1.5rem; text-align: center; color: #ef4444;">Failed to load certificates.</div>';
+      }
+    }
+
+    async function deleteCertificate(id) {
+      if (!confirm('Are you sure you want to delete this certificate?')) return;
+
+      try {
+        const res = await fetch(`/api/certificates/${id}`, { method: 'DELETE' });
+        const result = await res.json();
+
+        if (res.ok) {
+          loadCertificates();
+        } else {
+          alert('Error: ' + result.error);
+        }
+      } catch (err) {
+        console.error('Delete certificate failed:', err);
+        alert('Failed to connect to the server.');
+      }
+    }
+
     loadAnnouncements();
+    loadActivities();
+    loadCertificates();
   </script>
 </body>
 </html>

@@ -1,0 +1,168 @@
+/* tv.css - Television & Large Screen Responsive Stylesheet */
+
+/* 
+  Target screens typically used for TVs, TV browsers, and large displays.
+  TVs are usually viewed from a distance (10-foot user experience). 
+  By scaling the root font size, all layouts designed with 'rem' will scale up proportionally.
+*/
+
+/* 1. Root Scaling Breakpoints for Large Displays */
+@media screen and (min-width: 1400px) {
+  html {
+    font-size: 18px !important;
+  }
+}
+
+@media screen and (min-width: 1700px) {
+  html {
+    font-size: 21px !important;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  html {
+    font-size: 25px !important;
+  }
+}
+
+@media screen and (min-width: 2500px) {
+  html {
+    font-size: 30px !important;
+  }
+}
+
+/* 2. TV Screen Safe Areas (Avoid Overscan cuts on TVs) */
+@media screen and (min-width: 1400px) {
+  body {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box;
+  }
+  
+  /* Make sure sticky navbars don't clip */
+  .navbar {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+    width: 100% !important;
+  }
+}
+
+/* 3. General Layout & Grid Optimizations for TV */
+@media screen and (min-width: 1400px) {
+  /* Prevent containers from looking too narrow or cramped on wide TV screens */
+  .container {
+    max-width: 85rem !important;
+    width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
+  .section {
+    max-width: 90rem !important;
+    width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+
+  /* Grid scaling: Use rem units for minmax column sizing so they scale with root font-size.
+     This prevents TV screens from breaking layouts into 6+ tiny columns. */
+  .grid,
+  .news-grid,
+  .announcement-grid,
+  .pillars-grid,
+  .stats-grid,
+  .course-grid,
+  .kpi-grid,
+  .job-grid,
+  .benefit-grid,
+  .cards-grid,
+  .card-grid {
+    grid-template-columns: repeat(auto-fit, minmax(22rem, 1fr)) !important;
+    gap: 2.5rem !important;
+  }
+
+  /* 4. Card Sizing Adjustments for TV */
+  .card, 
+  .stat-card,
+  .news-card,
+  .pillar-card,
+  .announcement-card {
+    border-radius: 24px !important;
+    padding: 2.5rem !important;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.08) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+  
+  /* HR Structure Personnel Cards scaling */
+  .personnel-section {
+    max-width: 85rem !important;
+    gap: 2.5rem !important;
+  }
+  
+  .personnel-card {
+    width: 19rem !important;
+    height: 28rem !important;
+    border-radius: 20px !important;
+  }
+  
+  .personnel-card .image-box {
+    height: 18rem !important;
+  }
+  
+  .personnel-card .name {
+    font-size: 1.15rem !important;
+  }
+  
+  .personnel-card .position {
+    font-size: 0.9rem !important;
+  }
+
+  /* PrimeHRM Cards scaling */
+  .container .card {
+    width: 16rem !important;
+    height: 23rem !important;
+  }
+
+  /* Hero adjustments */
+  .hero-content {
+    max-width: 65rem !important;
+  }
+
+  /* Contact page iframe/map scaling */
+  .contact-container {
+    max-width: 80rem !important;
+    padding: 4rem !important;
+  }
+  
+  .contact-container h2 {
+    font-size: 3rem !important;
+  }
+  
+  .contact-content {
+    gap: 4rem !important;
+  }
+  
+  .map iframe {
+    height: 25rem !important;
+  }
+}
+
+/* 5. High Visibility Focus States for TV Remote / Keyboard D-Pad Navigation */
+a:focus,
+button:focus,
+input:focus,
+select:focus,
+textarea:focus,
+.pillar-card:focus,
+.card:focus,
+.stat-card:focus,
+.news-card:focus,
+.announcement-card:focus,
+.personnel-card:focus {
+  outline: 4px solid var(--accent, #3b82f6) !important;
+  outline-offset: 4px !important;
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.6) !important;
+  transform: translateY(-5px) scale(1.02) !important;
+}

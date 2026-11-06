@@ -5,6 +5,7 @@
   <title>HR Portal</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="hrstructure.css">
 </head>
 
@@ -41,8 +42,9 @@
 
 <div class="personnel-section">
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Sir Pedro.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">PEDRO S. SISNORIO JR.</p>
@@ -51,8 +53,9 @@
   </div>
 
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Sir Ike.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">JOSE B. BUHAYAN</p>
@@ -61,8 +64,9 @@
   </div>
 
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Ela.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">MAE ELA GRACE A. ALTERAN</p>
@@ -77,8 +81,9 @@
 
 <div class="personnel-section">
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Maam Tala.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">CRYSTAL ANNE B. LAGAÑA</p>
@@ -93,8 +98,9 @@
 
 <div class="personnel-section">
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Maam Yan.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">DYAN MAE S. BIGCAS</p>
@@ -109,8 +115,9 @@
 
 <div class="personnel-section">
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Maam Jee.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">JEN JEE C. PEÑASA</p>
@@ -119,8 +126,9 @@
   </div>
 
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Sir A.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">ADRIAN O. TALINES</p>
@@ -135,8 +143,9 @@
 
 <div class="personnel-section">
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Maam Haze.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">HAZEL B. MIRASOL </p>
@@ -145,8 +154,9 @@
   </div>
 
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Maam Ne.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">MARIE CRIS S. FLOGOSO</p>
@@ -155,8 +165,9 @@
   </div>
 
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Sir Tan.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">NATHANIEL P. DICHOSA</p>
@@ -165,8 +176,9 @@
   </div>
 
   <div class="personnel-card">
-    <div class="image-box">
+    <div class="image-box" title="Click to view certificates earned">
       <img src="images/personnels/Maam Neth.png" alt="">
+      <span class="cert-indicator"><i class="fa-solid fa-award"></i> View Certificates</span>
     </div>
     <div class="info">
       <p class="name">JEANNETTE O. SUTACIO</p>
@@ -176,6 +188,197 @@
 </div>
 
 
+
+
+<!-- CERTIFICATES MODAL -->
+<div id="certModal" class="cert-modal" style="display: none;">
+  <div class="cert-modal-backdrop" id="certModalBackdrop"></div>
+  <div class="cert-modal-content">
+    
+    <!-- Modal Header -->
+    <div class="cert-modal-header">
+      <div class="cert-modal-profile">
+        <img id="certModalAvatar" src="images/personnels/Sir Pedro.png" alt="Personnel Photo" class="cert-modal-avatar">
+        <div>
+          <h2 id="certModalName">Personnel Name</h2>
+          <p id="certModalPosition">Position</p>
+        </div>
+      </div>
+      <button class="cert-modal-close" id="certModalClose" title="Close (Esc)">&times;</button>
+    </div>
+
+    <!-- Modal Subheader -->
+    <div class="cert-modal-sub">
+      <span class="cert-count-pill" id="certCountPill"><i class="fa-solid fa-award"></i> 0 Certificates</span>
+      <span style="font-size: 12px; color: #64748b;">Click on any certificate to inspect full size</span>
+    </div>
+
+    <!-- Modal Body / Grid -->
+    <div class="cert-modal-body" id="certModalBody">
+      <!-- Content populated by JS -->
+    </div>
+
+  </div>
+</div>
+
+<!-- FULLSCREEN LIGHTBOX -->
+<div id="certLightbox" class="cert-lightbox" style="display: none;">
+  <div class="cert-lightbox-backdrop" id="certLightboxBackdrop"></div>
+  <div class="cert-lightbox-container">
+    <button class="cert-lightbox-close" id="certLightboxClose" title="Close Lightbox (Esc)">&times;</button>
+    <img id="certLightboxImg" src="" alt="Certificate Full View">
+    <div class="cert-lightbox-caption" id="certLightboxCaption"></div>
+  </div>
+</div>
+
+<script>
+  const certModal = document.getElementById('certModal');
+  const certModalBackdrop = document.getElementById('certModalBackdrop');
+  const certModalClose = document.getElementById('certModalClose');
+  const certModalAvatar = document.getElementById('certModalAvatar');
+  const certModalName = document.getElementById('certModalName');
+  const certModalPosition = document.getElementById('certModalPosition');
+  const certCountPill = document.getElementById('certCountPill');
+  const certModalBody = document.getElementById('certModalBody');
+
+  const certLightbox = document.getElementById('certLightbox');
+  const certLightboxBackdrop = document.getElementById('certLightboxBackdrop');
+  const certLightboxClose = document.getElementById('certLightboxClose');
+  const certLightboxImg = document.getElementById('certLightboxImg');
+  const certLightboxCaption = document.getElementById('certLightboxCaption');
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function openCertLightbox(src, caption) {
+    if (src.toLowerCase().endsWith('.pdf')) {
+      window.open(src, '_blank');
+      return;
+    }
+    certLightboxImg.src = src;
+    certLightboxCaption.textContent = caption || 'Certificate Preview';
+    certLightbox.style.display = 'flex';
+  }
+
+  function closeCertLightbox() {
+    certLightbox.style.display = 'none';
+    certLightboxImg.src = '';
+  }
+
+  function closeCertModal() {
+    certModal.style.display = 'none';
+  }
+
+  certModalClose.addEventListener('click', closeCertModal);
+  certModalBackdrop.addEventListener('click', closeCertModal);
+  certLightboxClose.addEventListener('click', closeCertLightbox);
+  certLightboxBackdrop.addEventListener('click', closeCertLightbox);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (certLightbox.style.display === 'flex') {
+        closeCertLightbox();
+      } else if (certModal.style.display === 'flex') {
+        closeCertModal();
+      }
+    }
+  });
+
+  async function openPersonnelCertificates(card) {
+    const nameEl = card.querySelector('.name');
+    const posEl = card.querySelector('.position');
+    const imgEl = card.querySelector('.image-box img');
+
+    const name = nameEl ? nameEl.textContent.trim() : '';
+    const position = posEl ? posEl.textContent.trim() : '';
+    const avatar = imgEl ? imgEl.src : '';
+
+    certModalName.textContent = name;
+    certModalPosition.textContent = position;
+    certModalAvatar.src = avatar;
+    certCountPill.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Loading...';
+    certModalBody.innerHTML = '<div style="text-align: center; padding: 3rem; color: #64748b;"><i class="fa-solid fa-circle-notch fa-spin fa-2x"></i><p style="margin-top: 10px;">Loading certificates...</p></div>';
+    
+    certModal.style.display = 'flex';
+
+    try {
+      const res = await fetch(`/api/certificates?personnel=${encodeURIComponent(name)}`);
+      const certs = await res.json();
+
+      if (!Array.isArray(certs) || certs.length === 0) {
+        certCountPill.innerHTML = '<i class="fa-solid fa-award"></i> 0 Certificates';
+        certModalBody.innerHTML = `
+          <div class="cert-empty-state">
+            <i class="fa-solid fa-award cert-empty-icon"></i>
+            <h3>No Certificates Recorded Yet</h3>
+            <p>No certificates have been uploaded yet for <strong>${escapeHtml(name)}</strong>. You can add them through the <a href="admin.html#certificates-section" style="color: #2563eb; font-weight: 600; text-decoration: underline;">Admin Dashboard</a>.</p>
+          </div>
+        `;
+        return;
+      }
+
+      certCountPill.innerHTML = `<i class="fa-solid fa-award"></i> ${certs.length} Certificate${certs.length === 1 ? '' : 's'}`;
+
+      let gridHtml = '<div class="cert-grid">';
+      certs.forEach(cert => {
+        const isPdf = cert.image_url.toLowerCase().endsWith('.pdf');
+        const certTitle = cert.title || 'Certificate';
+        gridHtml += `
+          <div class="cert-item-card">
+            <div class="cert-thumb-box" onclick="openCertLightbox('${cert.image_url}', '${escapeHtml(certTitle)}')">
+              ${isPdf ? `
+                <div style="text-align: center; color: #ef4444; padding: 20px;">
+                  <i class="fa-solid fa-file-pdf" style="font-size: 3.5rem;"></i>
+                  <p style="font-size: 11px; color: #64748b; margin-top: 8px; font-weight: 600;">PDF Certificate</p>
+                </div>
+              ` : `
+                <img src="${cert.image_url}" alt="${escapeHtml(certTitle)}" loading="lazy">
+              `}
+              <div class="cert-zoom-overlay">
+                <i class="fa-solid fa-magnifying-glass-plus"></i> View Full
+              </div>
+            </div>
+            <div class="cert-card-info">
+              <div>
+                <div class="cert-card-title">${escapeHtml(certTitle)}</div>
+                ${cert.date_issued ? `<div class="cert-card-date"><i class="fa-regular fa-calendar"></i> ${escapeHtml(cert.date_issued)}</div>` : ''}
+              </div>
+              <div style="margin-top: 12px;">
+                <a href="${cert.image_url}" target="_blank" onclick="event.stopPropagation();" style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; padding: 6px 12px; border-radius: 8px; text-decoration: none; border: 1px solid #cbd5e1; color: #1e3a8a; font-weight: 600; background: #f8fafc; transition: all 0.2s;">
+                  Open File <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 10px;"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      gridHtml += '</div>';
+
+      certModalBody.innerHTML = gridHtml;
+
+    } catch (err) {
+      console.error('Error loading certificates:', err);
+      certCountPill.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error';
+      certModalBody.innerHTML = '<div class="cert-empty-state"><p style="color: #ef4444;">Failed to load certificates. Please check if the server is running.</p></div>';
+    }
+  }
+
+  // Attach click listener to each personnel card and image box
+  document.querySelectorAll('.personnel-card').forEach(card => {
+    const imageBox = card.querySelector('.image-box');
+    if (imageBox) {
+      imageBox.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openPersonnelCertificates(card);
+      });
+    }
+    card.addEventListener('click', () => {
+      openPersonnelCertificates(card);
+    });
+  });
+</script>
 
 </body>
 </html>

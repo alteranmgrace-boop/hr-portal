@@ -27,7 +27,25 @@
     h1 { font-size: 2.5rem; margin-bottom: 1rem; color: var(--secondary); }
     .meta { color: var(--text-muted); margin-bottom: 2rem; font-weight: 600; }
     .main-img { width: 100%; border-radius: 20px; margin-bottom: 2rem; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-    .content { font-size: 1.1rem; line-height: 1.8; color: #334155; white-space: pre-wrap; }
+    .image-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .image-gallery a { display: block; border-radius: 16px; overflow: hidden; box-shadow: 0 8px 18px rgba(0,0,0,0.08); }
+    .image-gallery img { width: 100%; height: 260px; object-fit: cover; display: block; transition: transform 0.3s ease; }
+    .image-gallery a:hover img { transform: scale(1.04); }
+    .content { font-size: 1.1rem; line-height: 1.8; color: #334155; }
+    .content h3 { margin: 1.5rem 0 0.5rem; color: #1e3a8a; font-size: 1.25rem; }
+    .content ul { margin: 0.5rem 0 1.2rem 1.4rem; }
+    .content li { margin-bottom: 0.35rem; }
+    .content p { margin-bottom: 1rem; }
+    .content table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; border-radius: 12px; overflow: hidden; font-size: 0.95rem; }
+    .content th { background: #1e3a8a; color: white; padding: 12px 16px; text-align: left; font-weight: 700; text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.5px; }
+    .content td { padding: 12px 16px; border-bottom: 1px solid #e2e8f0; }
+    .content tr:nth-child(even) { background-color: #f8fafc; }
+    .content tr:hover { background-color: #eff6ff; }
     .back-btn { display: inline-flex; align-items: center; gap: 10px; color: var(--accent); text-decoration: none; font-weight: 700; margin-bottom: 2rem; }
   </style>
 </head>
@@ -62,14 +80,25 @@
         const images = attachments.filter(path => /\.(jpg|jpeg|png|gif|webp|jfif|svg|bmp|tiff)$/i.test(path));
         const docs = attachments.filter(path => /\.pdf$/i.test(path));
 
+        function formatContent(value) {
+          if (!value) return '';
+          const looksLikeHtml = /<[a-z][\s\S]*>/i.test(value);
+          if (looksLikeHtml) return value;
+          return String(value).replace(/\r\n|\r|\n/g, '<br>');
+        }
+
         container.innerHTML = `
           <span class="badge ${data.category}">${data.category}</span>
           <h1>${data.title}</h1>
-          <div class="meta">Published on ${data.date}</div>
+          ${data.date ? `<div class="meta">Published on ${data.date}</div>` : ''}
           
-          ${images.map(img => `<img src="${img}" class="main-img" alt="News Image">`).join('')}
+          ${images.length ? `
+            <div class="image-gallery">
+              ${images.map(img => `<a href="${img}" target="_blank" rel="noopener"><img src="${img}" alt="${data.title} image" loading="lazy"></a>`).join('')}
+            </div>
+          ` : ''}
           
-          <div class="content">${data.full_news || data.content}</div>
+          <div class="content">${formatContent(data.full_news || data.content)}</div>
           
           ${docs.length > 0 ? `
             <div style="margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0;">
